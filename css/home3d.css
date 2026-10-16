@@ -1,0 +1,62 @@
+
+.maze3d-bg {
+    position: fixed;
+    top: 52%;
+    left: 58%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    perspective: 1400px;
+    pointer-events: none;
+    opacity: 0.25;
+}
+
+.maze3d-cube {
+    position: relative;
+    width: 460px;
+    height: 460px;
+    transform-style: preserve-3d;
+    animation: maze3d-spin 40s linear infinite;
+}
+
+@keyframes maze3d-spin {
+    0%   { transform: rotateX(-22deg) rotateY(0deg); }
+    100% { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+.maze3d-face {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0, 255, 255, 0.75), rgba(0, 255, 255, 0.75)) no-repeat 22% 0 / 6px 55%,
+        linear-gradient(rgba(0, 255, 255, 0.75), rgba(0, 255, 255, 0.75)) no-repeat 55% 45% / 6px 55%,
+        linear-gradient(rgba(255, 20, 147, 0.75), rgba(255, 20, 147, 0.75)) no-repeat 78% 0 / 6px 45%,
+        linear-gradient(rgba(255, 20, 147, 0.75), rgba(255, 20, 147, 0.75)) no-repeat 0 30% / 55% 6px,
+        linear-gradient(rgba(0, 255, 255, 0.75), rgba(0, 255, 255, 0.75)) no-repeat 45% 68% / 55% 6px,
+        linear-gradient(rgba(255, 20, 147, 0.6), rgba(255, 20, 147, 0.6)) no-repeat 20% 88% / 45% 6px,
+        linear-gradient(135deg, rgba(51, 0, 102, 0.35), rgba(26, 0, 51, 0.45));
+    border: 2px solid rgba(0, 255, 255, 0.55);
+    box-shadow:
+        0 0 30px rgba(255, 20, 147, 0.3),
+        inset 0 0 40px rgba(0, 255, 255, 0.15);
+    backface-visibility: visible;
+}
+
+.maze3d-face.face-front  { transform: translateZ(230px); }
+.maze3d-face.face-back   { transform: rotateY(180deg) translateZ(230px); }
+.maze3d-face.face-right  { transform: rotateY(90deg) translateZ(230px); }
+.maze3d-face.face-left   { transform: rotateY(-90deg) translateZ(230px); }
+.maze3d-face.face-top    { transform: rotateX(90deg) translateZ(230px); }
+.maze3d-face.face-bottom { transform: rotateX(-90deg) translateZ(230px); }
+
+@media (max-width: 980px) {
+    .maze3d-bg {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .maze3d-cube {
+        animation: none;
+        transform: rotateX(-22deg) rotateY(35deg);
+    }
+}
